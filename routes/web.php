@@ -19,3 +19,4 @@ Route::get('/', function () {
 
 Route::get('/crud', 'CrudController@index')->name('halaman-crud-dasar');
 Route::get('/crud/add', 'CrudController@add')->name('halaman-add');
+Route::post('/crud/simpan', 'CrudController@save')->name('save-action');
