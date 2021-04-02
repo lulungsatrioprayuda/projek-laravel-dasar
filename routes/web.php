@@ -17,7 +17,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/crud', 'CrudController@index')->name('halaman-crud-dasar');
-Route::get('/crud/add', 'CrudController@add')->name('halaman-add');
-Route::post('/crud/simpan', 'CrudController@save')->name('save-action');
-Route::delete('/crud/delete/{id}', 'CrudController@delete')->name('delete-action');
+Route::get('crud', 'CrudController@index')->name('halaman-crud-dasar');
+Route::get('crud/add', 'CrudController@add')->name('halaman-add');
+Route::post('crud', 'CrudController@save')->name('save-action');
+Route::delete('crud/{id}', 'CrudController@delete')->name('delete-action');
+Route::get('crud/{id}/edit', 'CrudController@edit')->name('edit-page');
+Route::patch('crud/{id}', 'CrudController@editAction')->name('edit-action');

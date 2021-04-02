@@ -12,6 +12,35 @@
         <div class="col-12 col-md-12 col-lg-12">
             <a href="{{route('halaman-add')}}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> Tambah data</a>
             <hr>
+            {{-- ini untuk menampikan flash message nya --}}
+            @if (session('success_add'))
+                <div class="alert alert-success alert-dismissible show fade">
+                    <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                        <span>×</span>
+                        </button>
+                        {{ session('success_add') }}
+                    </div>
+                </div>
+            @elseif (session('success_update'))
+                <div class="alert alert-success alert-dismissible show fade">
+                    <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                        <span>×</span>
+                        </button>
+                        {{ session('success_update') }}
+                    </div>
+                </div>
+            @elseif (session('success_delete'))
+                <div class="alert alert-success alert-dismissible show fade">
+                    <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                        <span>×</span>
+                        </button>
+                        {{ session('success_delete') }}
+                    </div>
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                 <h4>Daftar Barang</h4>
@@ -30,7 +59,7 @@
                             <td>{{$data->kode_barang}}</td>
                             <td>{{$data->nama_barang}}</td>
                             <td>
-                                <a href="#" class="badge badge-warning">Edit</a>
+                                <a href="{{route('edit-page', $data->id)}}" class="badge badge-warning">Edit</a>
                                 <a href="#" data-id="{{$data->id}}" class="badge badge-danger swal-6">
                                 <form action="{{route('delete-action', $data->id)}}" id="delete{{$data->id}}" method="POST">
                                     @csrf
