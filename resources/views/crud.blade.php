@@ -31,7 +31,13 @@
                             <td>{{$data->nama_barang}}</td>
                             <td>
                                 <a href="#" class="badge badge-warning">Edit</a>
-                                <a href="#" class="badge badge-danger">Hapus</a>
+                                <a href="#" data-id="{{$data->id}}" class="badge badge-danger swal-6">
+                                <form action="{{route('delete-action', $data->id)}}" id="delete{{$data->id}}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                </form>
+                                    Hapus
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -42,3 +48,31 @@
         </div>
     </div>
 @endsection
+
+@push('page-scripts')
+        <script src="{{asset('assets/node_modules/sweetalert/dist/sweetalert.min.js')}}"></script>
+@endpush
+
+@push('after-scripts')
+        <script>$(".swal-6").click(function(e) {
+        id = e.target.dataset.id;
+    swal({
+        title: 'Yakin hapus data?',
+        text: 'Data yang sudah di hapus tidak dapat di kembalikan',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+        swal('Data sudah berhasil di hapus', {
+            icon: 'success',
+        });
+        $(`#delete${id}`).submit();
+        } else {
+        swal('Data tidak jadi di hapus');
+        }
+        });
+    });
+</script>
+@endpush

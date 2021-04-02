@@ -15,14 +15,14 @@ class CrudController extends Controller
         return view('crud', ['data_barang' => $data]);
     }
 
-    // method untuk tampilan tambah data
+    // ini method untuk menampilkan halaman form untuk tambah
     public function add()
     {
 
         return view('crud-tambah-data');
     }
 
-    // method untuk simpan data
+    // ini method aksi untuk melakukan aksi tambah
     public function save(Request $request)
     {
         // dd($request->all());                                                                 ini di ambil dari nama inputan ($request->nama_inputan)
@@ -32,8 +32,14 @@ class CrudController extends Controller
             ['kode_barang' => $request->kode_barang, 'nama_barang' => $request->nama_barang]
             // ['nama_barang' => $request->nama_barang, 'votes' => 0],
         );
+        return redirect()->route('halaman-crud-dasar');
     }
     // method untuk edit data
 
-    // method untuk hapus data 
+    // method untuk melakukan hapus data
+    public function delete($id)
+    {
+        DB::table('tb_barang')->where('id', $id)->delete();
+        return redirect()->route('halaman-crud-dasar');
+    }
 }

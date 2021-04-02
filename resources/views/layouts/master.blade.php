@@ -67,14 +67,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="{{asset('assets/js/stisla.js')}}"></script>
 
+    {{-- pagescript (digunakan untuk menampung script js di halaman tertentu) --}}
     <!-- JS Libraies -->
+    @stack('page-scripts')
+    {{-- end pagescript --}}
 
     <!-- Template JS File -->
     <script src="{{asset('assets/js/scripts.js')}}"></script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
 
-    {{-- pagescript (digunakan untuk menampung script js di halaman tertentu) --}}
-    @stack('page-scripts')
-    {{-- end pagescript --}}
+    @stack('after-scripts')
+    
     </body>
     </html>
