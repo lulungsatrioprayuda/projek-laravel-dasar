@@ -12,17 +12,6 @@ class CreateDataBarangTable extends Migration
      * @return void
      */
 
-    // tampilan pertama kali membuat table menggunakan migration
-    // public function up()
-    // {
-    //     Schema::create('data_barang', function (Blueprint $table) {
-    //         $table->id();
-    //         $table->string('kode_barang', 128)->unique();
-    //         $table->timestamps();
-    //     });
-    // }
-
-    // tampilan jika ingin menambahkan kolom baru di tabel
     public function up()
     {
         Schema::create('data_barang', function (Blueprint $table) {
