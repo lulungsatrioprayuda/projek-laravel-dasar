@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Controllers\Authtentication;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Hash;
+
+class AuthController extends Controller
+{
+    public function index()
+    {
+        return view('Authentication.login');
+    }
+
+    public function login(Request $request)
+    {
+        // dd($request->all());
+        // pencocokan data email yang ada di kolom database dengan inputan email di login
+        $data = User::where('email', $request->email)->first();
+        // dd($data);
+        // langkah 1 pengecekan jika $data->email ada maka lanjut langkah 2
+        if ($data) {
+            // langkah 2 akan mencocokan password dengan yang ada di dalam inputan ($request->password), dengan yang ada di dalam database ($data->password)
+            if (Hash::check($request->password, $data->password)) {
+                // langkah 3 jika email dan password sudah sesuai maka akan di arahkan ke dashboard
+                session(['berhasil_login' => true]);
+                return redirect('/dashboard');
+            } else {
+                // jika tidak password tidak sesuai dengan di database maka akan di lemparkan kembali ke halaman login
+                return redirect('/')->with('wrong_pasword', 'Password anda salah lah');
+            }
+        } else {
+            // jika email tidak ada dalam database maka lempar ke halaman login dan tampilkan message di bawah ini
+            return redirect('/')->with('email_wrong', 'Email anda tidak terdaftar');
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect('/')->with('logout_message', 'Anda telah logout');
+    }
+}
