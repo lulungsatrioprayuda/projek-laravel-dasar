@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', 'Authtentication\AuthController@index')->name('halaman-login');
-Route::post('login', 'Authtentication\AuthController@login')->name('process-login');
+Route::post('/', 'Authtentication\AuthController@login')->name('process-login');
+Route::get('/', 'Authtentication\AuthController@index')->name('login');
 
 // middleware('CekLoginMiddleware')
-Route::group(['middleware' => 'CekLoginMiddleware'], function () {
+//menggunakan fitur protek route dengan bantuan middleware"CekLoginMiddleware"
+// Route::group(['middleware' => 'CekLoginMiddleware'], function () {
+
+// menggunakan fitur protek route dengan middleware yang sudah di sediakan oleh laravel itu sendiri
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', function () {
         return view('index');
     });
