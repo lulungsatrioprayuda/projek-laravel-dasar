@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::post('/', 'Authtentication\AuthController@login')->name('process-login');
 Route::get('/', 'Authtentication\AuthController@index')->name('login');
@@ -35,3 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     // logout
     Route::get('logout', 'Authtentication\AuthController@logout')->name('process-logout');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
