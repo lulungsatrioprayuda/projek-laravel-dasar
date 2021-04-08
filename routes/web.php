@@ -18,8 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/', 'Authtentication\AuthController@login')->name('process-login');
-Route::get('/', 'Authtentication\AuthController@index')->name('login');
+// Route::post('/', 'Authtentication\AuthController@login')->name('process-login');
+// Route::get('/', 'Authtentication\AuthController@index')->name('login');
+Auth::routes();
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/', 'Auth\LoginController@login')->name('login');
 
 // middleware('CekLoginMiddleware')
 //menggunakan fitur protek route dengan bantuan middleware"CekLoginMiddleware"
@@ -40,6 +43,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('logout', 'Authtentication\AuthController@logout')->name('process-logout');
 });
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');

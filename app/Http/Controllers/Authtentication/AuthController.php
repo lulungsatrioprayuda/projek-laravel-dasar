@@ -15,6 +15,7 @@ class AuthController extends Controller
         return view('Authentication.login');
     }
 
+    // process login yang ini manual dan sudah tidak di pakai di karenakan sudah menggunakan login bawaan dari laravel ui
     public function login(Request $request)
     {
         // sistem login manual tidak menggunakan fitur bawaan laravel
@@ -38,16 +39,16 @@ class AuthController extends Controller
         // }
 
         // menggunakan fitur dari laravel itu sendiri
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect('/dashboard');
-        }
-        return redirect('/')->with('wrong_pasword', 'Email atau Password anda salah lah');
+        // if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        //     return redirect('/dashboard');
+        // }
+        // return redirect('/')->with('wrong_pasword', 'Email atau Password anda salah lah');
     }
 
     public function logout(Request $request)
     {
         // $request->session()->flush();
-        Auth::logout();
-        return redirect('/')->with('logout_message', 'Anda telah logout');
+        // Auth::logout();
+        // return redirect('/')->with('logout_message', 'Anda telah logout');
     }
 }

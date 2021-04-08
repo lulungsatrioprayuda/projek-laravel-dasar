@@ -38,4 +38,18 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function showLoginForm()
+    {
+        //ini bawaan dari laravel ui
+        // return view('auth.login');
+
+        // ini buatan sendiri
+        return view('Authentication.login');
+    }
+
+    public function username()
+    {
+        return 'username';
+    }
 }
