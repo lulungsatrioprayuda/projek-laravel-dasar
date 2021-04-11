@@ -32,13 +32,19 @@ Route::post('/', 'Auth\LoginController@login')->name('login');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', function () {
         return view('index');
-    });
+    })->name('dashboard');
     Route::get('crud', 'CrudController@index')->name('halaman-crud-dasar');
     Route::get('crud/add', 'CrudController@add')->name('halaman-add');
     Route::post('crud', 'CrudController@save')->name('save-action');
     Route::delete('crud/{id}', 'CrudController@delete')->name('delete-action');
     Route::get('crud/{id}/edit', 'CrudController@edit')->name('edit-page');
     Route::patch('crud/{id}', 'CrudController@editAction')->name('edit-action');
+
+
+    Route::resource('konfigurasi/setup', 'Konfigurasi\SetupController');
+
+
+
     // logout
     Route::get('logout', 'Authtentication\AuthController@logout')->name('process-logout');
 });
