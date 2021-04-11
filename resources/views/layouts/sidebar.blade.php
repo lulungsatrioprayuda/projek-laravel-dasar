@@ -7,14 +7,21 @@
                 <a href="index.html">St</a>
             </div>
             <ul class="sidebar-menu">
-                <li class="nav-item">
-                    <a href="{{route('dashboard')}}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                <li class="menu-header">Dashboard</li>
+                <li class="nav-item @if(Request::segment(1) == 'dashboard') 
+                        active
+                    @endif">
+                    <a href="{{route('dashboard')}}" class="nav-link "><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 </li>
                 <li class="menu-header">Menu</li>
-                <li class="nav-item dropdown active">
+                <li class="nav-item dropdown @if(Request::segment(1) == 'konfigurasi') 
+                        active
+                    @endif">
                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Konfigurasi</span></a>
                     <ul class="dropdown-menu">
-                    <li class="active"><a class="nav-link" href="{{route('setup.index')}}">Setup Aplikasi</a></li>
+                    <li class="@if(Request::segment(1) == 'konfigurasi' and Request::segment(2) == 'setup') 
+                        active
+                    @endif"><a class="nav-link" href="{{route('setup.index')}}">Setup Aplikasi</a></li>
                     <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
                     <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                     </ul>
@@ -27,7 +34,10 @@
                     <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                     </ul>
                 </li>
-                <li class="active"><a class="nav-link" href="{{route('halaman-crud-dasar')}}"><i class="far fa-square"></i> <span>Crud dasar</span></a></li>
+                <li class="@if(Request::segment(1) == 'crud') 
+                        active
+                    @endif"><a class="nav-link" href="{{route('halaman-crud-dasar')}}"><i class="far fa-square"></i> <span>Crud dasar</span></a>
+                </li>
                 {{-- 
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
