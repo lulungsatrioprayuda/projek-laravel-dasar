@@ -92,35 +92,38 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Kode barang</label>
-                                            <input type="text" name="nama_aplikasi" value="{{ old('nama_aplikasi') }}" class="form-control">
-                                            {{-- di bawah ini untuk menampilkan text error tersebut --}}
-                                            @error('nama_aplikasi')
-                                                <label class="text-danger">{{$message }} </label>
-                                            @enderror
-                                            
+                        <form action="{{route('setup.store')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nama Aplikasi</label>
+                                                <input type="text" name="nama_aplikasi" value="{{ old('nama_aplikasi') }}" class="form-control">
+                                                {{-- di bawah ini untuk menampilkan text error tersebut --}}
+                                                @error('nama_aplikasi')
+                                                    <label class="text-danger">{{$message }} </label>
+                                                @enderror
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Jumlah Hari Kerja</label>
+                                                <input type="text" name="jumlah_hari_kerja" value="{{ old('jumlah_hari_kerja') }}" class="form-control">
+                                                {{-- ini untuk menampilkan error --}}
+                                                @error('jumlah_hari_kerja')
+                                                    <label class="text-danger">{{$message }} </label>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Nama Barang</label>
-                                            <input type="text" name="jumlah_hari_kerja" value="{{ old('jumlah_hari_kerja') }}" class="form-control">
-                                            {{-- ini untuk menampilkan error --}}
-                                            @error('jumlah_hari_kerja')
-                                                <label class="text-danger">{{$message }} </label>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="modal-footer bg-whitesmoke br">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                            </div>
+                            <div class="modal-footer bg-whitesmoke br">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>

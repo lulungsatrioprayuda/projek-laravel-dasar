@@ -43,7 +43,19 @@ class SetupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        // $setup = new Setup;
+        // $setup->nama_aplikasi = $request->nama_aplikasi;
+        // $setup->jumlah_hari_kerja = $request->jumlah_hari_kerja;
+        // $setup->save();
+
+        // validasi dulu
+        $this->_validasi($request);
+
+        // jika lolos baru save
+        Setup::create($request->all());
+
+        return redirect()->back()->with('success_add', 'Data berhasil di simpan');
     }
 
     /**
@@ -89,5 +101,22 @@ class SetupController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // ini function untuk validasi
+    private function _validasi(Request $request)
+    {
+        // untuk validasinya
+        $validation = $request->validate(
+            [
+                'nama_aplikasi' => 'required|min:3',
+                'jumlah_hari_kerja' => 'required'
+            ],
+            [
+                'nama_aplikasi.required' => 'Nama Aplikasi harus di isi!',
+                'nama_aplikasi.min' => 'Nama Aplikasi minimal 3 digit',
+                'jumlah_hari_kerja.required' => 'Jumlah hari harus di isi!'
+            ]
+        );
     }
 }
