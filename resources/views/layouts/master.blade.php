@@ -46,6 +46,9 @@
                 @yield('content')
                 {{-- endcontent --}}
             </section>
+            {{-- buka yield untuk modal --}}
+            @yield('modal')
+            {{-- tutup yield untuk modal --}}
         </div>
         <footer class="main-footer">
             <div class="footer-left">

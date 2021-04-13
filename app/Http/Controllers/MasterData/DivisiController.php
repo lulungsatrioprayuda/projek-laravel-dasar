@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Konfigurasi;
+namespace App\Http\Controllers\MasterData;
 
 use App\Http\Controllers\Controller;
-use App\Models\Setup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SetupController extends Controller
+class DivisiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +15,8 @@ class SetupController extends Controller
      */
     public function index()
     {
-        // ini query builder untuk get data
-        // $data = DB::table('tb_barang')->paginate(3);
-
-        // ini eloquent untuk get data
-        $setup = Setup::get();
-        // dd($setup);
-        return view('konfigurasi/setup', ['setup' => $setup]);
+        $data = DB::table('tb_barang')->paginate(3);
+        return view('konfigurasi/setup', ['data_barang' => $data]);
     }
 
     /**
