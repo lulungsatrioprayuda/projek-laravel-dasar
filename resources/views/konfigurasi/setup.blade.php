@@ -61,7 +61,7 @@
                             <td>{{$data->nama_aplikasi}}</td>
                             <td>{{$data->jumlah_hari_kerja}}</td>
                             <td>
-                                <a href="{{route('edit-page', $data->id)}}" class="badge badge-warning">Edit</a>
+                                <a href="#" data-id="{{$data->id}}" class="badge badge-warning btn-edit">Edit</a>
                                 {{-- <a href="#" data-id="{{$data->id}}" class="badge badge-danger swal-6">
                                 <form action="{{route('delete-action', $data->id)}}" id="delete{{$data->id}}" method="POST">
                                     @csrf
@@ -131,7 +131,7 @@
         {{-- penutup modal tambah --}}
         
         {{-- pembuka modal edit --}}
-                <div class="modal fade" tabindex="-1" role="dialog" id="modal-edit">
+        <div class="modal fade" tabindex="-1" role="dialog" id="modal-edit">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
@@ -140,12 +140,14 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{route('setup.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('setup.store')}}" method="post" enctype="multipart/form-data" id="form-edit">
                             @csrf
+                            <div class="modal-body">
 
+                            </div>
                             <div class="modal-footer bg-whitesmoke br">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="button" class="btn btn-primary btn-update">Simpan</button>
                             </div>
                         </form>
                 </div>
@@ -159,25 +161,65 @@
 @endpush
 
 @push('after-scripts')
-        <script>$(".swal-6").click(function(e) {
-        id = e.target.dataset.id;
-    swal({
-        title: 'Yakin hapus data?',
-        text: 'Data yang sudah di hapus tidak dapat di kembalikan',
-        icon: 'warning',
-        buttons: true,
-        dangerMode: true,
-        })
-        .then((willDelete) => {
-        if (willDelete) {
-        swal('Data sudah berhasil di hapus', {
-            icon: 'success',
-        });
-        $(`#delete${id}`).submit();
-        } else {
-        swal('Data tidak jadi di hapus');
-        }
-        });
+<script>
+    // sweet alert
+    $(".swal-6").click(function(e) {
+            id = e.target.dataset.id;
+            swal({
+                title: 'Yakin hapus data?',
+                text: 'Data yang sudah di hapus tidak dapat di kembalikan',
+                icon: 'warning',
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                swal('Data sudah berhasil di hapus', {
+                    icon: 'success',
+                });
+                $(`#delete${id}`).submit();
+                } else {
+                swal('Data tidak jadi di hapus');
+                }
+            });
     });
+
+    // btn for modal edit
+    $('.btn-edit').on('click', function(){
+        // console.log($(this).data('id'));
+        // alert($(this).data('id'));
+
+        let id = $(this).data('id');
+        $.ajax({
+            url:`/konfigurasi/setup/${id}/edit`,
+            method:"GET",
+            success: function(data){
+                // console.log(data);
+                $('#modal-edit').find('.modal-body').html(data)
+                $('#modal-edit').modal('show');
+            },
+            error: function(error){
+                console.log(error.responseJSON);
+            }
+        })
+    })
+
+    // action for execute update
+    $('.btn-update').on('click', function(){
+        let id = $(this).data('id');
+        $.ajax({
+            url:`/konfigurasi/setup/${id}/edit`,
+            method:"GET",
+            success: function(data){
+                // console.log(data);
+                $('#modal-edit').find('.modal-body').html(data)
+                $('#modal-edit').modal('show');
+            },
+            error: function(error){
+                console.log(error.responseJSON);
+            }
+        })
+    })
+
 </script>
 @endpush

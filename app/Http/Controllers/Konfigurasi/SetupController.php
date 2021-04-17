@@ -75,9 +75,10 @@ class SetupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Setup $setup)
     {
-        //
+        // $setup = Setup::find($id);
+        return view('konfigurasi.setup-edit', compact('setup'));
     }
 
     /**
@@ -89,7 +90,6 @@ class SetupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
