@@ -184,6 +184,10 @@
             });
     });
 
+    @if($errors->any())
+        $('#exampleModal').modal('show');
+    @endif
+
     // btn for modal edit
     $('.btn-edit').on('click', function(){
         // console.log($(this).data('id'));
@@ -206,14 +210,19 @@
 
     // action for execute update
     $('.btn-update').on('click', function(){
-        let id = $(this).data('id');
+        let id = $('#form-edit').find('#id_data').val();
+        let formData = $('#form-edit').serialize();
+        // console.log(formData);
+        // console.log(id);
         $.ajax({
-            url:`/konfigurasi/setup/${id}/edit`,
-            method:"GET",
+            url:`/konfigurasi/setup/${id}`,
+            method:"PATCH",
+            data: formData,
             success: function(data){
                 // console.log(data);
-                $('#modal-edit').find('.modal-body').html(data)
-                $('#modal-edit').modal('show');
+                // $('#modal-edit').find('.modal-body').html(data)
+                $('#modal-edit').modal('hide');
+                window.location.assign('/konfigurasi/setup');
             },
             error: function(error){
                 console.log(error.responseJSON);

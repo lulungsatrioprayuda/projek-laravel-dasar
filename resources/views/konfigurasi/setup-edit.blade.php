@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6">
-        <input type="hidden" name="id" value="{{$setup->id}}">
+        <input type="hidden" name="id" value="{{$setup->id}}" id="id_data">
         <div class="form-group">
             <label>Nama Aplikasi</label>
             <input type="text" name="nama_aplikasi" value="{{ $setup->nama_aplikasi }}" class="form-control">
