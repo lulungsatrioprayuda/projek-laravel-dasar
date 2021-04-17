@@ -83,6 +83,7 @@
 @endsection
 
 @section('modal')
+        {{-- pembuka modal tambah --}}
         <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -127,6 +128,30 @@
                 </div>
             </div>
         </div>
+        {{-- penutup modal tambah --}}
+        
+        {{-- pembuka modal edit --}}
+                <div class="modal fade" tabindex="-1" role="dialog" id="modal-edit">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{route('setup.store')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="modal-footer bg-whitesmoke br">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+        {{-- penutup modal edit --}}
 @endsection
 
 @push('page-scripts')
