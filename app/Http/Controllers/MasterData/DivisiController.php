@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Http\Controllers\Controller;
+use App\Models\Divisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +16,13 @@ class DivisiController extends Controller
      */
     public function index()
     {
-        $data = DB::table('tb_barang')->paginate(3);
-        return view('konfigurasi/setup', ['data_barang' => $data]);
+        // ini query builder untuk get data
+        // $data = DB::table('tb_barang')->paginate(3);
+
+        // ini eloquent untuk get data
+        $data = Divisi::get();
+        // dd($setup);
+        return view('masterdata/divisi', ['data' => $data]);
     }
 
     /**
@@ -37,7 +43,19 @@ class DivisiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        // $setup = new Setup;
+        // $setup->nama_aplikasi = $request->nama_aplikasi;
+        // $setup->jumlah_hari_kerja = $request->jumlah_hari_kerja;
+        // $setup->save();
+        // dd($request);
+        // validasi dulu
+        $this->_validasi($request);
+
+        // jika lolos baru save
+        Divisi::create($request->all());
+
+        return redirect()->back()->with('success_add', 'Data berhasil di simpan');
     }
 
     /**
@@ -57,9 +75,11 @@ class DivisiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Divisi $setup)
     {
-        //
+
+        // $setup = Setup::find($id);
+        return view('konfigurasi/divisi-edit', compact('setup'));
     }
 
     /**
@@ -71,7 +91,11 @@ class DivisiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->_validasi($request);
+        Divisi::where('id', $id)->update([
+            'nama_aplikasi' => $request->nama_aplikasi,
+            'jumlah_hari_kerja' => $request->jumlah_hari_kerja
+        ]);
     }
 
     /**
@@ -83,5 +107,26 @@ class DivisiController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // ini function untuk validasi
+    private function _validasi(Request $request)
+    {
+        // untuk validasinya
+        $validation = $request->validate(
+            [
+                'nama_aplikasi' => 'required|min:3',
+                'jumlah_hari_kerja' => 'required|min:1|max:100|numeric'
+                // untuk tipe data int atau numeric itu min max termasuk kalkulasi bukan sesuai dengan jumlah digit jika maxnya 10 maka hanya bisa 1 sampai 0, bukan maksimal 10 digit
+            ],
+            [
+                'nama_aplikasi.required' => 'Nama Aplikasi harus di isi!',
+                'nama_aplikasi.min' => 'Nama Aplikasi minimal 3 digit',
+                'jumlah_hari_kerja.required' => 'Jumlah hari harus di isi!',
+                // 'jumlah_hari_kerja.int' => 'Jumlah hari harus angka',
+                'jumlah_hari_kerja.min' => 'Jumlah hari minimal 1 hari',
+                'jumlah_hari_kerja.max' => 'Jumlah hari maksimal 100 hari'
+            ]
+        );
     }
 }

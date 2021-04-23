@@ -40,8 +40,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('crud/{id}/edit', 'CrudController@edit')->name('edit-page');
     Route::patch('crud/{id}', 'CrudController@editAction')->name('edit-action');
 
-
+    // recources konfigurasi
     Route::resource('konfigurasi/setup', 'Konfigurasi\SetupController');
+
+    // recources Divisi
+    Route::resource('master-data/divisi', 'MasterData\DivisiController');
 
 
 
