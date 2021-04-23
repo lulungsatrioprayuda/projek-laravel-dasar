@@ -96,9 +96,9 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Divisi</label>
-                                                <input type="text" name="divisi" value="{{ old('divisi') }}" class="form-control">
+                                                <input type="text" name="nama" value="{{ old('divisi') }}" class="form-control">
                                                 {{-- di bawah ini untuk menampilkan text error tersebut --}}
-                                                @error('divisi')
+                                                @error('nama')
                                                     <label class="text-danger">{{$message }} </label>
                                                 @enderror
                                                 

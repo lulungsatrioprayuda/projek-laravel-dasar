@@ -115,17 +115,13 @@ class DivisiController extends Controller
         // untuk validasinya
         $validation = $request->validate(
             [
-                'nama_aplikasi' => 'required|min:3',
-                'jumlah_hari_kerja' => 'required|min:1|max:100|numeric'
+                'nama' => 'required|min:2|max:100',
                 // untuk tipe data int atau numeric itu min max termasuk kalkulasi bukan sesuai dengan jumlah digit jika maxnya 10 maka hanya bisa 1 sampai 0, bukan maksimal 10 digit
             ],
             [
-                'nama_aplikasi.required' => 'Nama Aplikasi harus di isi!',
-                'nama_aplikasi.min' => 'Nama Aplikasi minimal 3 digit',
-                'jumlah_hari_kerja.required' => 'Jumlah hari harus di isi!',
-                // 'jumlah_hari_kerja.int' => 'Jumlah hari harus angka',
-                'jumlah_hari_kerja.min' => 'Jumlah hari minimal 1 hari',
-                'jumlah_hari_kerja.max' => 'Jumlah hari maksimal 100 hari'
+                'nama.required' => 'Nama Aplikasi harus di isi!',
+                'nama.min' => 'Nama Aplikasi minimal 2 digit',
+                'nama.max' => 'Nama Aplikasi maksimal 100 biji',
             ]
         );
     }
