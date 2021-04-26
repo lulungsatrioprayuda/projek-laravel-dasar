@@ -75,11 +75,11 @@ class DivisiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Divisi $setup)
+    public function edit(Divisi $divisi)
     {
 
-        // $setup = Setup::find($id);
-        return view('konfigurasi/divisi-edit', compact('setup'));
+        // $setup = Divisi::find($id);
+        return view('masterdata.divisi-edit', compact('divisi'));
     }
 
     /**

@@ -181,7 +181,7 @@
 
         let id = $(this).data('id');
         $.ajax({
-            url:`/konfigurasi/setup/${id}/edit`,
+            url:`/master-data/divisi/${id}/edit`,
             method:"GET",
             success: function(data){
                 // console.log(data);
