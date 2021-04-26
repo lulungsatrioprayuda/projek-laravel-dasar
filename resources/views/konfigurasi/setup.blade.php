@@ -230,9 +230,13 @@
                 if(err.status == 422){
                     if(typeof(err_log.jumlah_hari_kerja) !== 'undefined'){
                         $('#modal-edit').find('[name="jumlah_hari_kerja"]').prev().html('<label class="text-danger"> '+ err_log.jumlah_hari_kerja[0] +' </label>')
+                    }else{
+                        $('#modal-edit').find('[name="jumlah_hari_kerja"]').prev().html('<label>Jumlah Hari Kerja</label>')
                     }
                     if(typeof(err_log.nama_aplikasi) !== 'undefined'){
                         $('#modal-edit').find('[name="nama_aplikasi"]').prev().html('<label class="text-danger">'+err_log.nama_aplikasi[0]+'</label>')
+                    }else{
+                        $('#modal-edit').find('[name="nama_aplikasi"]').prev().html('<label>Nama Aplikasi</label>')
                     }
                 }
             }
