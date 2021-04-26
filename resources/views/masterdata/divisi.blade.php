@@ -209,8 +209,16 @@
                 $('#modal-edit').modal('hide');
                 window.location.assign('/master-data/divisi');
             },
-            error: function(error){
-                console.log(error.responseJSON);
+            error: function(err){
+                console.log(err.responseJSON);
+                let err_log = err.responseJSON.errors;
+                if(err.status == 422){
+                    if(typeof(err_log.nama) !== 'undefined'){
+                        $('#modal-edit').find('[name="nama"]').prev().html('<label class="text-danger"> '+ err_log.nama[0] +' </label>')
+                    }else{
+                        $('#modal-edit').find('[name="nama"]').prev().html('<label>Jumlah Hari Kerja</label>')
+                    }
+                }
             }
         })
     })

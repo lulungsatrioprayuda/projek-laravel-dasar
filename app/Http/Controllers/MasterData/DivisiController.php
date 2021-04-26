@@ -77,7 +77,6 @@ class DivisiController extends Controller
      */
     public function edit(Divisi $divisi)
     {
-
         // $setup = Divisi::find($id);
         return view('masterdata.divisi-edit', compact('divisi'));
     }
@@ -93,8 +92,7 @@ class DivisiController extends Controller
     {
         $this->_validasi($request);
         Divisi::where('id', $id)->update([
-            'nama_aplikasi' => $request->nama_aplikasi,
-            'jumlah_hari_kerja' => $request->jumlah_hari_kerja
+            'nama' => $request->nama
         ]);
     }
 
@@ -121,7 +119,7 @@ class DivisiController extends Controller
             [
                 'nama.required' => 'Nama Aplikasi harus di isi!',
                 'nama.min' => 'Nama Aplikasi minimal 2 digit',
-                'nama.max' => 'Nama Aplikasi maksimal 100 biji',
+                'nama.max' => 'Nama Aplikasi maksimal 100 digit',
             ]
         );
     }
