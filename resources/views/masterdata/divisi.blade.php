@@ -121,12 +121,12 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Modal title</h5>
+                            <h5 class="modal-title">Edit Divisi</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{route('setup.store')}}" method="post" enctype="multipart/form-data" id="form-edit">
+                        <form action="{{route('divisi.store')}}" method="post" enctype="multipart/form-data" id="form-edit">
                             @csrf
                             <div class="modal-body">
 
@@ -176,16 +176,13 @@
 
     // btn for modal edit
     $('.btn-edit').on('click', function(){
-        // console.log($(this).data('id'));
-        // alert($(this).data('id'));
 
         let id = $(this).data('id');
         $.ajax({
             url:`/master-data/divisi/${id}/edit`,
             method:"GET",
             success: function(data){
-                // console.log(data);
-                $('#modal-edit').find('.modal-body').html(data)
+                $('#modal-edit').find('.modal-body').html(data);
                 $('#modal-edit').modal('show');
             },
             error: function(error){
