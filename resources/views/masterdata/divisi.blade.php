@@ -126,7 +126,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{route('divisi.store')}}" method="post" enctype="multipart/form-data" id="form-edit">
+                        <form action="#" method="post" enctype="multipart/form-data" id="form-edit">
                             @csrf
                             <div class="modal-body">
 
@@ -194,18 +194,20 @@
     // action for execute update
     $('.btn-update').on('click', function(){
         let id = $('#form-edit').find('#id_data').val();
+                                        // seriallize() digunakan untuk menampung semua value di dalam form yang memiliki id (form-edit)
         let formData = $('#form-edit').serialize();
+        // di bawah ini untuk menampilkan respon untuk formData biasanya kalau di laravel menggunakan dd() atau var_dump()
         // console.log(formData);
-        // console.log(id);
+        // return
         $.ajax({
-            url:`/konfigurasi/setup/${id}`,
+            url:`/master-data/divisi/${id}`,
             method:"PATCH",
             data: formData,
             success: function(data){
                 // console.log(data);
                 // $('#modal-edit').find('.modal-body').html(data)
                 $('#modal-edit').modal('hide');
-                window.location.assign('/konfigurasi/setup');
+                window.location.assign('/master-data/divisi');
             },
             error: function(error){
                 console.log(error.responseJSON);

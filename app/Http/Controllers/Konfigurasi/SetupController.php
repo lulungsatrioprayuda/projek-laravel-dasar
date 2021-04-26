@@ -123,7 +123,7 @@ class SetupController extends Controller
                 'nama_aplikasi.required' => 'Nama Aplikasi harus di isi!',
                 'nama_aplikasi.min' => 'Nama Aplikasi minimal 3 digit',
                 'jumlah_hari_kerja.required' => 'Jumlah hari harus di isi!',
-                // 'jumlah_hari_kerja.int' => 'Jumlah hari harus angka',
+                'jumlah_hari_kerja.numeric' => 'Jumlah hari harus angka',
                 'jumlah_hari_kerja.min' => 'Jumlah hari minimal 1 hari',
                 'jumlah_hari_kerja.max' => 'Jumlah hari maksimal 100 hari'
             ]
