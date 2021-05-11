@@ -32,7 +32,7 @@
                     </div>
                 </div>
             @elseif (session('success_delete'))
-                <div class="alert alert-success alert-dismissible show fade">
+                <div class="alert alert-danger alert-dismissible show fade">
                     <div class="alert-body">
                         <button class="close" data-dismiss="alert">
                         <span>×</span>
@@ -58,13 +58,13 @@
                             <td>{{$dt->nama}}</td>
                             <td>
                                 <a href="#" data-id="{{$dt->id}}" class="badge badge-warning btn-edit">Edit</a>
-                                {{-- <a href="#" data-id="{{$data->id}}" class="badge badge-danger swal-6">
-                                <form action="{{route('delete-action', $data->id)}}" id="delete{{$data->id}}" method="POST">
+                                <a href="#" data-id="{{$dt->id}}" class="badge badge-danger swal-confirm">
+                                <form action="{{route('divisi.destroy', $dt->id)}}" id="delete{{$dt->id}}" method="POST">
                                     @csrf
                                     @method('delete')
                                 </form>
                                     Hapus
-                                </a> --}}
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -149,7 +149,7 @@
 @push('after-scripts')
 <script>
     // sweet alert
-    $(".swal-6").click(function(e) {
+    $(".swal-confirm").click(function(e) {
             id = e.target.dataset.id;
             swal({
                 title: 'Yakin hapus data?',

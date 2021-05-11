@@ -105,6 +105,8 @@ class DivisiController extends Controller
     public function destroy($id)
     {
         //
+        Divisi::destroy($id);
+        return redirect()->back()->with('success_delete', 'Data berhasil di hapus');
     }
 
     // ini function untuk validasi
